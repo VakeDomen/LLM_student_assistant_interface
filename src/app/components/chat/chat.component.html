@@ -1,0 +1,5 @@
+<div *ngFor="let message of messages">
+    <p>{{ message }}</p>
+</div>
+<input [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Type a message...">
+<button (click)="sendMessage()">Send</button>
