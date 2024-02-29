@@ -15,7 +15,7 @@ export class ChatService {
  
   private apiUrl = environment.apiUrl;
   private context: string | undefined;
-  private lang: Language = 'SLO'
+  private lang: Language = 'SLO';
   
   constructor(
     private http: HttpClient,
@@ -28,7 +28,7 @@ export class ChatService {
     if (this.context) {
       payload["context"] = this.context;
     }
-    const resp = await firstValueFrom(this.http.post<ChatResponse>(`${this.apiUrl}/query`, payload)).catch(e => {
+    const resp = await firstValueFrom(this.http.post<ChatResponse>(`${this.apiUrl}/chat`, payload)).catch(e => {
       console.error(e)
       return {
         response: "Ugh...something went wrong.. :/",
@@ -36,6 +36,20 @@ export class ChatService {
       }
     });
     this.context = resp.context;
+    return resp.response
+  }
+
+  public async query(question: string): Promise<string> {
+    const payload = {
+      "query": `${this.getLangPrefix()} ${question}`
+    } as any;
+    
+    const resp = await firstValueFrom(this.http.post<ChatResponse>(`${this.apiUrl}/query`, payload)).catch(e => {
+      console.error(e)
+      return {
+        response: "Ugh...something went wrong.. :/",
+      }
+    });
     return resp.response
   }
   

@@ -3,7 +3,6 @@ import { ChatService } from 'src/app/services/chat.service';
 import { Message } from '../message/message.component';
 
 
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -12,8 +11,10 @@ import { Message } from '../message/message.component';
 export class ChatComponent implements OnInit {
   public messageContent: string = '';
   public messages: Message[] = [];
-  @ViewChild('chat') private messenger!: ElementRef;
   public waiting: boolean = false;
+  public chatConversation: boolean = false;
+
+  @ViewChild('chat') private messenger!: ElementRef;
 
   constructor(
     private chatService: ChatService
@@ -33,7 +34,13 @@ export class ChatComponent implements OnInit {
     this.messages.push(userMsg);
     setTimeout(() => this.scrollToBottom(), 10);
     this.messageContent = ''; // Clear input after sending
-    const response = await this.chatService.chat(userMsg.content);
+
+    let response;
+    if (this.chatConversation) {
+      response = await this.chatService.chat(userMsg.content);
+    } else {
+      response = await this.chatService.query(userMsg.content);
+    }
     
 
     const botMsg = {
