@@ -4,6 +4,9 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ChatResponse } from '../models/chat.response';
 
+
+export type Language = 'SLO' | 'EN';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +15,7 @@ export class ChatService {
  
   private apiUrl = environment.apiUrl;
   private context: string | undefined;
+  private lang: Language = 'SLO'
   
   constructor(
     private http: HttpClient,
@@ -19,12 +23,13 @@ export class ChatService {
 
   public async chat(question: string): Promise<string> {
     const payload = {
-      "query": question
+      "query": `${this.getLangPrefix()} ${question}`
     } as any;
     if (this.context) {
       payload["context"] = this.context;
     }
     const resp = await firstValueFrom(this.http.post<ChatResponse>(`${this.apiUrl}/query`, payload)).catch(e => {
+      console.error(e)
       return {
         response: "Ugh...something went wrong.. :/",
         context: undefined,
@@ -33,4 +38,13 @@ export class ChatService {
     this.context = resp.context;
     return resp.response
   }
+  
+  
+  getLangPrefix() {
+    if (this.lang == 'SLO') return "Sem študent. Ti si zaposlen v študentskem referatu. Odgovori na moje vporašanje v slovenščini: "
+    return "I am a student. You work in the student's office. Answer my question: "
+  }
+
+
 }
+

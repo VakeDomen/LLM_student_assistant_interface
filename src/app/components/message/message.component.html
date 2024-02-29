@@ -1,5 +1,5 @@
 <div 
-    class="msg"
+    class="msg mt-5"
     [ngClass]="{
         'right-msg': message?.type == 'user',
         'left-msg': message?.type == 'bot'
@@ -7,7 +7,7 @@
 >
     <div
      class="msg-img"
-     style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+     style="background-image: url(https://cdn1.vectorstock.com/i/1000x1000/16/60/chat-bot-icon-robot-virtual-assistant-vector-43541660.jpg)"
     ></div>
 
     <div class="msg-bubble">
@@ -16,7 +16,8 @@
       </div>
 
       <div class="msg-text">
-        {{ message?.content }}
+        <!-- disable sanitizer using markdown component -->
+        {{message?.content}}
       </div>
     </div>
   </div>
