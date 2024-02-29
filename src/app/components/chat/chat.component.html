@@ -1,5 +1,35 @@
-<div *ngFor="let message of messages">
-    <p>{{ message }}</p>
-</div>
-<input [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Type a message...">
-<button (click)="sendMessage()">Send</button>
+<section class="msger">
+    <header class="msger-header">
+        <div class="msger-header-title">
+            <i class="fas fa-comment-alt"></i> SimpleChat
+        </div>
+        <div class="msger-header-options">
+            <span><i class="fas fa-cog"></i></span>
+        </div>
+    </header>
+    <main #chat class="msger-chat">
+        <div *ngFor="let historyMessage of messages">
+            <app-message 
+                [message]="historyMessage"
+            ></app-message>
+        </div>
+    </main>
+
+    <form class="msger-inputarea">
+        <input 
+            [(ngModel)]="messageContent" 
+            type="text" 
+            class="msger-input"
+            placeholder="Enter your message..."
+            name="messageInput"
+        >
+        <button 
+            type="submit" 
+            class="msger-send-btn" 
+            (click)="sendMessage()"
+            [disabled]="waiting"
+        >
+            Send
+        </button>
+    </form>
+</section>

@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ChatPanelComponent } from './pages/chat-panel/chat-panel.component';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
     ChatPanelComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
