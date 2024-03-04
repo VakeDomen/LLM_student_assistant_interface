@@ -18,9 +18,14 @@
         <div class="msg-info-name">{{ getName() }}</div>
       </div>
 
-      <div class="msg-text">
+      <div class="msg-text" *ngIf="!message?.loader">
         <!-- disable sanitizer using markdown component -->
-        {{message?.content}}
+        <markdown>
+          {{message?.content}}
+        </markdown>
+      </div>
+      <div class="msg-text" *ngIf="message?.loader">
+        <span class="loader"></span>
       </div>
     </div>
   </div>

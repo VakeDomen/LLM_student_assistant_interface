@@ -29,26 +29,29 @@ export class ChatComponent implements OnInit {
 
     const userMsg = {
       content: this.messageContent, 
-      type: 'user'
+      type: 'user',
+      loader: false,
     } as Message;
     this.messages.push(userMsg);
     setTimeout(() => this.scrollToBottom(), 10);
     this.messageContent = ''; // Clear input after sending
 
-    let response;
-    if (this.chatConversation) {
-      response = await this.chatService.chat(userMsg.content);
-    } else {
-      // response = await this.chatService.query(userMsg.content);
-      response = await this.chatService.query_hyde(userMsg.content);
-    }
-    
-
     const botMsg = {
-      content: response, 
-      type: 'bot'
+      content: "", 
+      type: 'bot',
+      loader: true,
     } as Message;
     this.messages.push(botMsg);
+    setTimeout(() => this.scrollToBottom(), 10)
+    if (this.chatConversation) {
+      botMsg.content = await this.chatService.chat(userMsg.content);
+    } else {
+      // response = await this.chatService.query(userMsg.content);
+      botMsg.content = await this.chatService.query_hyde(userMsg.content);
+    }
+    botMsg.loader = false;
+
+    
 
     setTimeout(() => this.scrollToBottom(), 10)
     this.waiting = false;

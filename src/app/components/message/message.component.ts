@@ -4,6 +4,7 @@ export type MessageType = 'bot' | 'user';
 export interface Message {
   content: string,
   type: MessageType,
+  loader: boolean
 }
 
 @Component({
