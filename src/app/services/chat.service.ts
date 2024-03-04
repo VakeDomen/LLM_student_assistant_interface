@@ -52,6 +52,20 @@ export class ChatService {
     });
     return resp.response
   }
+
+  public async query_hyde(question: string): Promise<string> {
+    const payload = {
+      "query": `${this.getLangPrefix()} ${question}`
+    } as any;
+    
+    const resp = await firstValueFrom(this.http.post<ChatResponse>(`${this.apiUrl}/hyde`, payload)).catch(e => {
+      console.error(e)
+      return {
+        response: "Ugh...something went wrong.. :/",
+      }
+    });
+    return resp.response
+  }
   
   
   getLangPrefix() {

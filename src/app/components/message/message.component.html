@@ -7,7 +7,10 @@
 >
     <div
      class="msg-img"
-     style="background-image: url(https://cdn1.vectorstock.com/i/1000x1000/16/60/chat-bot-icon-robot-virtual-assistant-vector-43541660.jpg)"
+     [ngClass]="{
+        'user-icon': message?.type == 'user',
+        'bot-icon': message?.type == 'bot'
+     }"
     ></div>
 
     <div class="msg-bubble">

@@ -25,7 +25,7 @@ import { DEFAULT_TIMEOUT, TimeoutInterceptor } from './services/timeout.intercep
   ],
   providers: [
     [{ provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true }],
-    [{ provide: DEFAULT_TIMEOUT, useValue: 60000 }]
+    [{ provide: DEFAULT_TIMEOUT, useValue: 300000 }]
   ],
   bootstrap: [AppComponent]
 })

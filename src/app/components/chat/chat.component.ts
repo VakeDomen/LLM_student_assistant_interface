@@ -39,7 +39,8 @@ export class ChatComponent implements OnInit {
     if (this.chatConversation) {
       response = await this.chatService.chat(userMsg.content);
     } else {
-      response = await this.chatService.query(userMsg.content);
+      // response = await this.chatService.query(userMsg.content);
+      response = await this.chatService.query_hyde(userMsg.content);
     }
     
 
