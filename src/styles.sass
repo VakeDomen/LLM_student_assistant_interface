@@ -2,9 +2,10 @@
 @import 'bulma-switch/src/sass/index.sass'
 
 :root 
-  --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)
+  --body-bg: linear-gradient(135deg, #FFE6C7 0%, #FFA559 100%)
   --msger-bg: #FFE6C7
-  --border: 2px solid #ddd
+  --msger-chat-bg: #595959
+  --border: 2px solid #404040
   --left-msg-bg: #FFE6C7
   --right-msg-bg: #FFA559
 
@@ -37,12 +38,12 @@ body
   justify-content: space-between
   margin: auto
   width: 100%
-  max-width: 90%
+  /*max-width: 90%*/
   border: var(--border)
   border-radius: 5px
   background: var(--msger-bg)
   box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2)
-  height: 80%
+  height: 100%
   overflow: scroll
 
 
@@ -51,23 +52,24 @@ body
   /*justify-content: space-between*/
   padding: 10px
   border-bottom: var(--border)
-  background: #eee
-  color: #666
+  background: #454545
+  color: #FF6000
 
 
 .msger-chat 
   flex: 1
   overflow-y: auto
   padding: 10px
+  background-color: var(--msger-chat-bg)
 
 .msger-chat::-webkit-scrollbar 
   width: 6px
 
 .msger-chat::-webkit-scrollbar-track 
-  background: #ddd
+  background: #FFE6C7
 
 .msger-chat::-webkit-scrollbar-thumb 
-  background: #bdbdbd
+  background: #FFE6C7
 
 .msg 
   display: flex
@@ -81,7 +83,7 @@ body
   min-width: 50px
   height: 50px
   margin-right: 10px
-  background: #ddd
+  background: #454545
   background-repeat: no-repeat
   background-position: center
   background-size: cover
@@ -116,7 +118,7 @@ body
 
 .right-msg .msg-bubble 
   background: var(--right-msg-bg)
-  color: #fff
+  color: #454545
   border-bottom-right-radius: 0
 
 .right-msg .msg-img 
@@ -127,7 +129,7 @@ body
   display: flex
   padding: 10px
   border-top: var(--border)
-  background: #eee
+  background: #454545
 
 .msger-inputarea * 
   padding: 10px
@@ -151,6 +153,6 @@ body
   background: #FFA559
 
 
-.msger-chat 
-  background-color: #454545
+// .msger-chat 
+//   background-color: #454545
   
