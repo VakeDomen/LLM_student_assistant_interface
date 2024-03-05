@@ -66,7 +66,27 @@ export class ChatService {
     });
     return resp.response
   }
+
+
+  public queryStream(query: string) {
+    const headers = { 'Content-Type': 'application/json' };
+    const body = JSON.stringify({ query });
+    return this.http.post(`${this.apiUrl}/stream`, body, { headers, responseType: 'text', observe: 'body' });
+  }
   
+  public streamData(query: string): Observable<string> {
+    return new Observable(observer => {
+      const eventSource = new EventSource(`${this.apiUrl}/stream`);
+      eventSource.onmessage = event => {
+        observer.next(event.data);
+      };
+      eventSource.onerror = error => {
+        observer.error(error);
+        eventSource.close();
+      };
+      return () => eventSource.close();
+    });
+  }
   
   getLangPrefix() {
     if (this.lang == 'SLO') return "Sem študent. Ti si zaposlen v študentskem referatu. Odgovori na moje vporašanje v slovenščini: "

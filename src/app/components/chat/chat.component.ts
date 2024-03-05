@@ -13,6 +13,8 @@ export class ChatComponent implements OnInit {
   public messages: Message[] = [];
   public waiting: boolean = false;
   public chatConversation: boolean = false;
+  
+  private stream: boolean = false;
 
   @ViewChild('chat') private messenger!: ElementRef;
 
@@ -28,7 +30,7 @@ export class ChatComponent implements OnInit {
     else this.waiting = true;
 
     const userMsg = {
-      content: this.messageContent, 
+      content: this.messageContent,
       type: 'user',
       loader: false,
     } as Message;
@@ -37,21 +39,31 @@ export class ChatComponent implements OnInit {
     this.messageContent = ''; // Clear input after sending
 
     const botMsg = {
-      content: "", 
+      content: "",
       type: 'bot',
       loader: true,
     } as Message;
     this.messages.push(botMsg);
     setTimeout(() => this.scrollToBottom(), 10)
-    if (this.chatConversation) {
+
+    if (this.stream) {
+        this.chatService.streamData(userMsg.content).subscribe({
+          next: (data: string) => {
+            console.log("D", data);
+            botMsg.loader = false;
+            botMsg.content += data;
+          },
+          error: (error: any) => console.error(error),
+        });
+    } else if (this.chatConversation) {
       botMsg.content = await this.chatService.chat(userMsg.content);
     } else {
-      // response = await this.chatService.query(userMsg.content);
-      botMsg.content = await this.chatService.query_hyde(userMsg.content);
+      botMsg.content = await this.chatService.query(userMsg.content);
+      // botMsg.content = await this.chatService.query_hyde(userMsg.content);
     }
     botMsg.loader = false;
 
-    
+
 
     setTimeout(() => this.scrollToBottom(), 10)
     this.waiting = false;
@@ -59,7 +71,7 @@ export class ChatComponent implements OnInit {
 
   scrollToBottom(): void {
     try {
-        this.messenger.nativeElement.scrollTop = this.messenger.nativeElement.scrollHeight;
-    } catch(err) { }                 
-}
+      this.messenger.nativeElement.scrollTop = this.messenger.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
 }

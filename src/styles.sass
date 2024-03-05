@@ -2,14 +2,31 @@
 @import 'bulma-switch/src/sass/index.sass'
 
 :root 
-  --body-bg: linear-gradient(135deg, #FFE6C7 0%, #FFA559 100%)
+  /* FAMNIT THEME */
+  --body-bg: linear-gradient(135deg, #EEF5FF 0%, #86B6F6 100%)
   --msger-bg: #FFE6C7
-  --msger-chat-bg: #595959
-  --border: 2px solid #404040
-  --left-msg-bg: #FFE6C7
-  --right-msg-bg: #FFA559
+  --msger-chat-bg: #DFECFF
+  --border: 2px solid #414d70
+  --left-msg-bg: #B4D4FF
+  --right-msg-bg: #86B6F6
+  --primary: #176B87
+  --secondary: #86B6F6
+  --secondary-light: #B4D4FF
+  --gray: #414d70
+  --gray-light: #d7d7d7
 
-
+  /*  ORANGE THEME */
+  // --body-bg: linear-gradient(135deg, #FFE6C7 0%, #FFA559 100%)
+  // --msger-bg: #FFE6C7
+  // --msger-chat-bg: #595959
+  // --border: 2px solid #404040
+  // --left-msg-bg: #FFE6C7
+  // --right-msg-bg: #FFA559
+  // --primary: #FF6000
+  // --secondary: #FFA559
+  // --secondary-light: #FFE6C7
+  // --gray: #454545
+  // --gray-light: #d7d7d7
 
 // html 
 //   box-sizing: border-box
@@ -52,9 +69,8 @@ body
   /*justify-content: space-between*/
   padding: 10px
   border-bottom: var(--border)
-  background: #454545
-  color: #FF6000
-
+  background: var(--gray)
+  color: var(--gray-light)
 
 .msger-chat 
   flex: 1
@@ -66,10 +82,10 @@ body
   width: 6px
 
 .msger-chat::-webkit-scrollbar-track 
-  background: #FFE6C7
+  background: var(--secondary-light)
 
 .msger-chat::-webkit-scrollbar-thumb 
-  background: #FFE6C7
+  background: var(--secondary-light)
 
 .msg 
   display: flex
@@ -83,7 +99,7 @@ body
   min-width: 50px
   height: 50px
   margin-right: 10px
-  background: #454545
+  background: var(--gray)
   background-repeat: no-repeat
   background-position: center
   background-size: cover
@@ -118,7 +134,7 @@ body
 
 .right-msg .msg-bubble 
   background: var(--right-msg-bg)
-  color: #454545
+  color: var(--gray)
   border-bottom-right-radius: 0
 
 .right-msg .msg-img 
@@ -129,7 +145,7 @@ body
   display: flex
   padding: 10px
   border-top: var(--border)
-  background: #454545
+  background: var(--gray)
 
 .msger-inputarea * 
   padding: 10px
@@ -139,20 +155,17 @@ body
 
 .msger-input 
   flex: 1
-  background: #ddd
+  background: var(--gray-light)
 
 .msger-send-btn 
   margin-left: 10px
-  background: #FF6000
-  color: #fff
+  background: var(--primary)
+  color: var(--secondary-light)
   font-weight: bold
   cursor: pointer
   transition: background 0.23s
 
 .msger-send-btn:hover 
-  background: #FFA559
+  background: var(--secondary)
 
-
-// .msger-chat 
-//   background-color: #454545
   
