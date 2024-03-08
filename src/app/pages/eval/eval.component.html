@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="level-right">
-            <button class="button is-info">Next question</button>
+            <button class="button is-info" (click)="goToNext()">Next question</button>
         </div>
     </div>
 
@@ -37,11 +37,11 @@
     </div>
     <div class="columns">
         <div class="column is-6" *ngFor="let hit of hits ; let  i = index">
-            <div class="box mb-3" *ngIf="hits && hits.length && hits[0]">
+            <div class="box mb-3">
                 <h1 class="title is-3">
                     <div class="level">
                         <div class="level-left">
-                            Hit: {{ hits[0].score }}
+                            Hit: {{ hit.score }}
                         </div>
     
                         
@@ -62,7 +62,7 @@
                     </div>
 
                 </h1>
-                <markdown>{{ hits[0].payload._node_content.text }}</markdown>
+                <markdown>{{ hit.payload._node_content.text }}</markdown>
             </div>
         </div>
         
