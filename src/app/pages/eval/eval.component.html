@@ -1,0 +1,70 @@
+<div class="container" *ngIf="queryEval && hitScores && hits">
+
+    <div class="level">
+        <div class="level-left">
+            <div class="box">
+                <h1 class="title is-3">
+                    Hits left to eval: {{ hitsLeft() }}
+                </h1>
+            </div>
+        </div>
+        <div class="level-right">
+            <button class="button is-info">Next question</button>
+        </div>
+    </div>
+
+    <div class="box">
+        <h1 class="title is-3">Q</h1>
+        <markdown>{{queryEval.question}}</markdown>
+    </div>
+    <div class="box mt-2">
+        <h1 class="title is-3">A</h1>
+        <markdown>{{queryEval.answer}}</markdown>
+        <div class="level">
+            <div class="level-item">
+                <button class="button is-danger" (click)="answer=false">Bad</button>
+            </div>
+
+            <div class="level-item" *ngIf="answer != undefined">
+                <h1 *ngIf="answer" class="title is-3 is-color-success">Good</h1>
+                <h1 *ngIf="!answer" class="title is-3 is-color-danger">Bad</h1>
+            </div>
+
+            <div class="level-item">
+                <button class="button is-success" (click)="answer=true">Good</button>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-6" *ngFor="let hit of hits ; let  i = index">
+            <div class="box mb-3" *ngIf="hits && hits.length && hits[0]">
+                <h1 class="title is-3">
+                    <div class="level">
+                        <div class="level-left">
+                            Hit: {{ hits[0].score }}
+                        </div>
+    
+                        
+                    </div>
+                    <div class="level">
+                        <div class="level-item">
+                            <button class="button is-danger" (click)="hitScores[i]=0">Bad</button>
+                        </div>
+                        
+                        <div class="level-item" *ngIf="hitScores[i] != -1">
+                            <h1 *ngIf="hitScores[i] == 1" class="title is-3 is-color-success">Good</h1>
+                            <h1 *ngIf="hitScores[i] == 0" class="title is-3 is-color-danger">Bad</h1>
+                        </div>
+
+                        <div class="level-item">
+                            <button class="button is-success" (click)="hitScores[i]=1">Good</button>
+                        </div>
+                    </div>
+
+                </h1>
+                <markdown>{{ hits[0].payload._node_content.text }}</markdown>
+            </div>
+        </div>
+        
+    </div>
+</div>

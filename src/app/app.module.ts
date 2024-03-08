@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ChatPanelComponent } from './pages/chat-panel/chat-panel.component';
 import { MessageComponent } from './components/message/message.component';
 import { DEFAULT_TIMEOUT, TimeoutInterceptor } from './services/timeout.interceptor';
+import { EvalComponent } from './pages/eval/eval.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DEFAULT_TIMEOUT, TimeoutInterceptor } from './services/timeout.intercep
     ChatComponent,
     ChatPanelComponent,
     MessageComponent,
+    EvalComponent,
   ],
   imports: [
     BrowserModule,

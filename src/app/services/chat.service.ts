@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChatResponse } from '../models/chat.response';
 
 
-export type Language = 'SLO' | 'EN';
+export type Language = 'sl' | 'en';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ChatService {
  
   private apiUrl = environment.apiUrl;
   private context: string | undefined;
-  private lang: Language = 'SLO';
+  public lang: Language = 'en';
   
   constructor(
     private http: HttpClient,
@@ -41,7 +41,8 @@ export class ChatService {
 
   public async query(question: string): Promise<string> {
     const payload = {
-      "query": `${this.getLangPrefix()} ${question}`
+      "query": `${this.getLangPrefix()} ${question}`,
+      "lang": this.lang,
     } as any;
     
     const resp = await firstValueFrom(this.http.post<ChatResponse>(`${this.apiUrl}/query`, payload)).catch(e => {
@@ -55,7 +56,8 @@ export class ChatService {
 
   public async query_hyde(question: string): Promise<string> {
     const payload = {
-      "query": `${this.getLangPrefix()} ${question}`
+      "query": `${this.getLangPrefix()} ${question}`,
+      "lang": this.lang,
     } as any;
     
     const resp = await firstValueFrom(this.http.post<ChatResponse>(`${this.apiUrl}/hyde`, payload)).catch(e => {
@@ -89,8 +91,8 @@ export class ChatService {
   }
   
   getLangPrefix() {
-    if (this.lang == 'SLO') return "Sem študent. Ti si zaposlen v študentskem referatu. Odgovori na moje vporašanje v slovenščini: "
-    return "I am a student. You work in the student's office. Answer my question: "
+    if (this.lang == 'sl') return "Sem študent. Ti si zaposlen v študentskem referatu. Odgovori na moje vporašanje v slovenščini: "
+    return "I am a student. You work in the student's office. Answer my question and don't make stuff up: "
   }
 
 
