@@ -24,6 +24,12 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const botMsg = {
+      content: "Hello, how can I help you?",
+      type: 'bot',
+      loader: false,
+    } as Message;
+    this.messages.push(botMsg);
   }
 
   async sendMessage(): Promise<void> {
