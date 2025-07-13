@@ -19,11 +19,13 @@ export class EvalService {
     return this.http.get<QueryObject>(`${this.apiUrl}/next`);
   }
 
-  public submit(id: string, good_hits: number, good_answer: boolean) {
+  public submit(id: string, good_hits: number, good_answer: boolean, good_first: boolean, good_second: boolean,) {
     const payload = {
       id: id,
       good_hits: good_hits,
       good_answer: good_answer,
+      good_first: good_first,
+      good_second: good_second,
     } as any;
     return this.http.post<any>(`${this.apiUrl}/submit`, payload);
   }

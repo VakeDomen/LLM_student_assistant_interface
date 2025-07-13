@@ -15,6 +15,7 @@ export class EvalComponent implements OnInit {
   public answer: boolean | undefined;
   public id: string | undefined;
 
+
   constructor(
     private evalService: EvalService,
   ) { }
@@ -59,9 +60,10 @@ export class EvalComponent implements OnInit {
 
   goToNext() {
     if (this.answer == undefined) return
+    if (this.hitScores == undefined) return
     if (this.hitsLeft() != 0) return
     if (!this.id) return;
-    this.evalService.submit(this.id, this.hitScore(), this.answer).subscribe(resp => {
+    this.evalService.submit(this.id, this.hitScore(), this.answer, this.hitScores[0] == 1, this.hitScores[1] == 1).subscribe(resp => {
       console.log("RESP: ", resp);
       this.nextQuestion();
     })
